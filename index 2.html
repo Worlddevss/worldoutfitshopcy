@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coming Soon - Shop</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+    .container {
+      max-width: 600px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 1.2em;
+      margin-bottom: 40px;
+    }
+    .countdown {
+      display: flex;
+      justify-content: space-around;
+      font-size: 1.5em;
+    }
+    .countdown div {
+      text-align: center;
+    }
+    .countdown span {
+      display: block;
+      font-size: 2.5em;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Το κατάστημά μας ανοίγει σύντομα!</h1>
+    <p>Μείνετε συντονισμένοι. Ερχόμαστε στις 31/12/2024, ώρα 12:00.</p>
+    <div class="countdown">
+      <div>
+        <span id="days">0</span>
+        Ημέρες
+      </div>
+      <div>
+        <span id="hours">0</span>
+        Ώρες
+      </div>
+      <div>
+        <span id="minutes">0</span>
+        Λεπτά
+      </div>
+      <div>
+        <span id="seconds">0</span>
+        Δευτερόλεπτα
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Υπολογισμός αντίστροφης μέτρησης
+    const targetDate = new Date("December 31, 2024 12:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerText = days;
+      document.getElementById("hours").innerText = hours;
+      document.getElementById("minutes").innerText = minutes;
+      document.getElementById("seconds").innerText = seconds;
+
+      if (difference < 0) {
+        clearInterval(timer);
+        document.querySelector(".countdown").innerHTML = "Άνοιξε!";
+      }
+    }
+
+    const timer = setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
